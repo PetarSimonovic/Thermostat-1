@@ -55,6 +55,22 @@ describe('Thermostat', function(){
     expect(thermostat.currentTemperature()).toEqual(20);
   });
 
+  it('should return low energy usage if temperature is below 18', function () {
+    thermostat.down(5)
+    expect(thermostat.energyUsage()).toEqual("This temperature is low usage");
+  });
+
+  it('should return medium energy usage if temperature is above 18 and below or equal 25', function() {
+    expect(thermostat.energyUsage()).toEqual("This temperature is medium usage");
+  });
+
+  it('should return high energy usage if temperature is above 25', function() {
+    thermostat.powerModeOff();
+    thermostat.up(6);
+    expect(thermostat.energyUsage()).toEqual("This temperature is high usage");
+  });
+
+
 
 
 }); // class end
