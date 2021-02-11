@@ -2,20 +2,42 @@
 
 class Thermostat {
 
-  constructor(){
+  constructor() {
     this.temperature = 20;
+    this.powerSavingMode = true;
+    this.maxTemp = 25;
   };
 
-  currentTemperature(){
+  currentTemperature() {
     return this.temperature;
   };
 
-  up(amount){
+  currentPowerSavingMode() {
+    return this.powerSavingMode;
+  };
+
+  up(amount) {
+    if (this.temperature + amount > this.maxTemp) {
+      throw new Error('That is above the maximum temperature');
+    };
     this.temperature += amount;
   };
 
-  down(amount){
+  down(amount) {
+    if (this.temperature - amount < 10) {
+      throw new Error('That is below the minimum temperature');
+    };
     this.temperature -= amount;
+  };
+
+  powerModeOff() {
+    this.powerSavingMode = false;
+    this.maxTemp = 32;
+  };
+
+  powerModeOn() {
+    this.powerSavingMode = true;
+    this.maxTemp = 25;
   };
 
 }

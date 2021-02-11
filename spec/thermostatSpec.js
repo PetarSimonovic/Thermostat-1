@@ -21,6 +21,34 @@ describe('Thermostat', function(){
     expect(thermostat.currentTemperature()).toEqual(19);
   });
 
+  it('raises an error when you go below min temp', function() {
+    expect(function(){thermostat.down(11);}).toThrowError("That is below the minimum temperature");
+  });
+
+  it('raises an error when you go above max temp', function() {
+    expect(function(){thermostat.up(6);}).toThrowError("That is above the maximum temperature");
+  });
+
+  it('defaults as saving power mode as on', function() {
+    expect(thermostat.currentPowerSavingMode()).toBe(true);
+  });
+
+  it('should change the power saving mode to off', function() {
+    thermostat.powerModeOff();
+    expect(thermostat.currentPowerSavingMode()).toBe(false);
+  });
+
+  it('should change the power saving mode to on', function() {
+    thermostat.powerModeOn();
+    expect(thermostat.currentPowerSavingMode()).toBe(true);
+  });
+
+  it('should raise the max temp to 32 when PSM is off', function() {
+    thermostat.powerModeOff()
+    thermostat.up(6)
+    expect(thermostat.currentTemperature()).toEqual(26)
+  });
+
 
 
 }); // class end
