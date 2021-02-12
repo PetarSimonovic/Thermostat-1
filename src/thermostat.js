@@ -17,17 +17,17 @@ class Thermostat {
   };
 
   up(amount) {
-    if (this.temperature + amount > this.maxTemp) {
+    if (this.temperature + 1 > this.maxTemp) {
       throw new Error('That is above the maximum temperature');
     };
-    this.temperature += amount;
+    this.temperature += 1;
   };
 
   down(amount) {
-    if (this.temperature - amount < 10) {
+    if (this.temperature - 1 < 10) {
       throw new Error('That is below the minimum temperature');
     };
-    this.temperature -= amount;
+    this.temperature -= 1;
   };
 
   powerModeOff() {
